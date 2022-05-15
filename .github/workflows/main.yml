@@ -3,6 +3,7 @@ name: React Native Android Docker Image Test
 on:
   workflow_dispatch:
   push:
+  pull_request:
 
 env:
   PROJECT_NAME: RNDockerAndroidTest
