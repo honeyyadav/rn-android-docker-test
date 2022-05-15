@@ -1,0 +1,24 @@
+name: React Native Android Docker Image Test
+
+on:
+  workflow_dispatch:
+  push:
+
+env:
+  PROJECT_NAME: RNDockerAndroidTest
+
+jobs:
+  android-build:
+    runs-on: ubuntu-latest
+    container: reactnativecommunity/react-native-android
+    
+    strategy:
+      fail-fast: false
+      matrix:
+        rn_version: ['0.64.x', '0.65.x', '0.66.x', '0.67.x', '0.68.x']
+
+    steps:
+      - name: Create new react native project
+        run: |
+          npx react-native init $PROJECT_NAME --version ${{ matrix.rn_version }}
+
