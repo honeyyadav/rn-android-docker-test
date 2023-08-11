@@ -5,9 +5,6 @@ on:
   push:
   pull_request:
 
-env:
-  PROJECT_NAME: RNDockerAndroidTest
-
 jobs:
   android-build:
     runs-on: ubuntu-latest
