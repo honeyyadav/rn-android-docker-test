@@ -58,24 +58,3 @@ jobs:
           ALLOW_PLAINTEXT_LISTENER: yes
         # depends_on:
         #   - zookeeper
-    volumes:
-      zookeeper_data:
-        driver: local
-        driver_opts:
-          o: bind
-          type: none
-          device: ~/tmp/kafka-docker/docker-volumes/kafka/zookeeper/data
-      kafka_data:
-        driver: local
-        driver_opts:
-          o: bind
-          type: none
-          device: ~/tmp/kafka-docker/docker-volumes/kafka/brocker/data
-      my-db:
-        driver: local
-        driver_opts:
-          o: bind
-          type: none
-          device: ~/tmp/kafka-docker/docker-volumes/mysql/data
-
-
