@@ -43,7 +43,7 @@ jobs:
         volumes:
           - "zookeeper_data:/bitnami"
         env:
-          - ALLOW_ANONYMOUS_LOGIN=yes
+          - ALLOW_ANONYMOUS_LOGIN: yes
 
       kafka:
         image: docker.io/bitnami/kafka:3.2
@@ -52,10 +52,10 @@ jobs:
         volumes:
           - "kafka_data:/bitnami"
         env:
-          - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://localhost:9092
-          - KAFKA_ADVERTISED_HOST_NAME= localhost
-          - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
-          - ALLOW_PLAINTEXT_LISTENER=yes
+          - KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
+          - KAFKA_ADVERTISED_HOST_NAME: localhost
+          - KAFKA_CFG_ZOOKEEPER_CONNECT: zookeeper:2181
+          - ALLOW_PLAINTEXT_LISTENER: yes
         depends_on:
           - zookeeper
     volumes:
