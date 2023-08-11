@@ -16,5 +16,5 @@ jobs:
           mkdir -p ~/tmp/kafka-docker/docker-volumes/kafka/zookeeper/data
           mkdir -p ~/tmp/kafka-docker/docker-volumes/kafka/brocker/data
           mkdir -p ~/tmp/kafka-docker/docker-volumes/mysql/data
-          docker compose up
+          docker compose up -d
 
