@@ -10,5 +10,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Create new react native project
-        run: docker compose up
+        run: ls
 
