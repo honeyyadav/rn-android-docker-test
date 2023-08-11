@@ -12,5 +12,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v1
       - name: Create new react native project
-        run: docker compose up
+        run: |
+          mkdir ~/tmp/kafka-docker/docker-volumes/kafka/zookeeper/data
+          mkdir ~/tmp/kafka-docker/docker-volumes/kafka/brocker/data
+          mkdir ~/tmp/kafka-docker/docker-volumes/mysql/data
+          docker compose up
 
