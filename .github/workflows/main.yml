@@ -12,5 +12,5 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v1
       - name: Create new react native project
-        run: ls
+        run: docker compose up
 
