@@ -21,4 +21,3 @@ jobs:
           docker exec $(docker ps | grep kafka | awk '{print $1}') bash -c 'kafka-topics.sh --create --topic test --bootstrap-server localhost:9092'
           docker exec $(docker ps | grep kafka | awk '{print $1}') bash -c 'kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic test'
 
-
