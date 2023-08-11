@@ -17,9 +17,65 @@ jobs:
           mkdir -p ~/tmp/kafka-docker/docker-volumes/kafka/zookeeper/data
           mkdir -p ~/tmp/kafka-docker/docker-volumes/kafka/brocker/data
           mkdir -p ~/tmp/kafka-docker/docker-volumes/mysql/data
-          curl -fsSL https://get.docker.com | sh
-          docker compose up -d
-          sleep 10
-          docker exec $(docker ps | grep kafka | awk '{print $1}') bash -c 'kafka-topics.sh --create --topic test --bootstrap-server localhost:9092'
-          docker exec $(docker ps | grep kafka | awk '{print $1}') bash -c 'kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic test'
+          # apt update -y
+          # apt install curl -y
+          # curl -fsSL https://get.docker.com | sh
+          # docker compose up -d
+          # sleep 10
+          # docker exec $(docker ps | grep kafka | awk '{print $1}') bash -c 'kafka-topics.sh --create --topic test --bootstrap-server localhost:9092'
+          # docker exec $(docker ps | grep kafka | awk '{print $1}') bash -c 'kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic test'
+    services:
+      mongodb_container:
+        # This image automatically creates a replica set required for transactions
+        image: prismagraphql/mongo-single-replica:4.4.3-bionic
+        environment:
+          MONGO_INITDB_ROOT_USERNAME: root
+          MONGO_INITDB_ROOT_PASSWORD: example
+          INIT_WAIT_SEC: 3
+        ports:
+          - 27017:27017
+
+      # services:
+      zookeeper:
+        image: docker.io/bitnami/zookeeper:3.8
+        ports:
+          - "2181:2181"
+        volumes:
+          - "zookeeper_data:/bitnami"
+        environment:
+          - ALLOW_ANONYMOUS_LOGIN=yes
+
+      kafka:
+        image: docker.io/bitnami/kafka:3.2
+        ports:
+          - "9092:9092"
+        volumes:
+          - "kafka_data:/bitnami"
+        environment:
+          - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://localhost:9092
+          - KAFKA_ADVERTISED_HOST_NAME= localhost
+          - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
+          - ALLOW_PLAINTEXT_LISTENER=yes
+        depends_on:
+          - zookeeper
+    volumes:
+      zookeeper_data:
+        driver: local
+        driver_opts:
+          o: bind
+          type: none
+          device: ~/tmp/kafka-docker/docker-volumes/kafka/zookeeper/data
+      kafka_data:
+        driver: local
+        driver_opts:
+          o: bind
+          type: none
+          device: ~/tmp/kafka-docker/docker-volumes/kafka/brocker/data
+      my-db:
+        driver: local
+        driver_opts:
+          o: bind
+          type: none
+          device: ~/tmp/kafka-docker/docker-volumes/mysql/data
+
 
