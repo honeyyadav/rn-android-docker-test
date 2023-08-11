@@ -17,6 +17,7 @@ jobs:
           mkdir -p ~/tmp/kafka-docker/docker-volumes/kafka/zookeeper/data
           mkdir -p ~/tmp/kafka-docker/docker-volumes/kafka/brocker/data
           mkdir -p ~/tmp/kafka-docker/docker-volumes/mysql/data
+          curl -fsSL https://get.docker.com | sh
           docker compose up -d
           sleep 10
           docker exec $(docker ps | grep kafka | awk '{print $1}') bash -c 'kafka-topics.sh --create --topic test --bootstrap-server localhost:9092'
