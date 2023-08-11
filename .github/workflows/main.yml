@@ -28,7 +28,7 @@ jobs:
       mongodb_container:
         # This image automatically creates a replica set required for transactions
         image: prismagraphql/mongo-single-replica:4.4.3-bionic
-        environment:
+        env:
           MONGO_INITDB_ROOT_USERNAME: root
           MONGO_INITDB_ROOT_PASSWORD: example
           INIT_WAIT_SEC: 3
@@ -42,7 +42,7 @@ jobs:
           - "2181:2181"
         volumes:
           - "zookeeper_data:/bitnami"
-        environment:
+        env:
           - ALLOW_ANONYMOUS_LOGIN=yes
 
       kafka:
@@ -51,7 +51,7 @@ jobs:
           - "9092:9092"
         volumes:
           - "kafka_data:/bitnami"
-        environment:
+        env:
           - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://localhost:9092
           - KAFKA_ADVERTISED_HOST_NAME= localhost
           - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
